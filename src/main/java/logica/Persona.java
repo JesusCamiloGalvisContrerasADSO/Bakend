@@ -2,10 +2,22 @@
 package logica;
 
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+@Entity
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 
 public class Persona {
-    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String nombre;
     private String apellido;
     private String telefono;
@@ -13,7 +25,9 @@ public class Persona {
     private String tipo_sangre;
     private String tipo_doc;
     private String direccion;
+    @Temporal(TemporalType.DATE)
     private Date fecha_naci;
+    @Temporal(TemporalType.DATE)
     private Date fecha_inicio_contrato;
     private String descripcion;
  
@@ -21,8 +35,8 @@ public class Persona {
     public Persona() {
     }
 
-    public Persona( String nombre, String apellido, String telefono, String email, String tipo_sangre, String tipo_doc, String direccion, Date fecha_naci, Date fecha_inicio_contrato, String descripcion) {
-        
+    public Persona(int id, String nombre, String apellido, String telefono, String email, String tipo_sangre, String tipo_doc, String direccion, Date fecha_naci, Date fecha_inicio_contrato, String descripcion) {
+        this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;
@@ -33,9 +47,15 @@ public class Persona {
         this.fecha_naci = fecha_naci;
         this.fecha_inicio_contrato = fecha_inicio_contrato;
         this.descripcion = descripcion;
-        
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNombre() {
         return nombre;
@@ -116,7 +136,7 @@ public class Persona {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
+    
     
     
     

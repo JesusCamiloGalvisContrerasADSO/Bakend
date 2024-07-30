@@ -3,14 +3,28 @@ package logica;
 
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
+
+@Entity
 
 public class Ventas {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_venta;
     private Date fecha_venta;
     private float precio_total;
+
+    @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL)
+    private List<Venta_lote> ventaLotes;
+
+    @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL)
     private List<Venta_animal> ventaAnimales;
-    private List<Venta_lote> ventaLotes; 
 
     public Ventas() {
     }

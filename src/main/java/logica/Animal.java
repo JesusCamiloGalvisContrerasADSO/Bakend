@@ -3,17 +3,36 @@ package logica;
 
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
-
+@Entity
 public class Animal {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_animal;
     private int num_animal;
     private String raza;
     private String Tipo_sexo;
-    private Date Fecha_cambios; 
-    private List<Peso_animal> pesos;
+    private Date Fecha_cambios;
+
+    @ManyToOne
+    @JoinColumn(name = "lote_id")
     private Lotes lote;
+
+    @OneToMany(mappedBy = "animal")
+    private List<Peso_animal> pesos;
+
+    @OneToOne(mappedBy = "animal", cascade = CascadeType.ALL)
+    private Historia_clinica historiaClinica;
 
     public Animal() {
     }

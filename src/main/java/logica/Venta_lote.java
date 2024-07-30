@@ -1,11 +1,28 @@
 
 package logica;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
 
 public class Venta_lote {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_venta_lote;
+    
+    @ManyToOne
+    @JoinColumn(name = "venta_id")
     private Ventas venta;
+    
+    @ManyToOne
+    @JoinColumn(name = "lote_id")
     private Lotes lote;
+    
     private float precio;
 
     public Venta_lote() {

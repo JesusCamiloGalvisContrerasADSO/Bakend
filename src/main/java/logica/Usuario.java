@@ -1,16 +1,26 @@
 
 package logica;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
 public class Usuario {
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id_usuario;
     private String rol;
     private String contrasenia;
     private String Nombre_user;
 
+    
+    
     public Usuario() {
     }
-
+    
+    
     public Usuario(int id_usuario, String rol, String contrasenia, String Nombre_user) {
         this.id_usuario = id_usuario;
         this.rol = rol;

@@ -3,25 +3,53 @@ package logica;
 
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-
+@Entity
 public class Lotes {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_lote;
     private String Tipo_raza;
+    
+    @Temporal(TemporalType.DATE)
     private Date Fecha_cambios;
     private int Cantidad_animales;
-    private List<Animal> Animal;
+    
+    @OneToMany(mappedBy = "lote")
+    private List<Animal> animales;
+    
+    @ManyToOne
+    @JoinColumn(name = "trabajador_id")
+    private Trabajador trabajador;
+    
+    @ManyToOne
+    @JoinColumn(name = "administrador_id")
+    private Administrador administrador;
+
+    
+    
 
     public Lotes() {
     }
 
-    public Lotes(int id_lote, String Tipo_raza, Date Fecha_cambios, int Cantidad_animales, List<Animal> Animal) {
+    public Lotes(int id_lote, String Tipo_raza, Date Fecha_cambios, int Cantidad_animales, List<Animal> animales, Trabajador trabajador, Administrador administrador) {
         this.id_lote = id_lote;
         this.Tipo_raza = Tipo_raza;
         this.Fecha_cambios = Fecha_cambios;
         this.Cantidad_animales = Cantidad_animales;
-        this.Animal = Animal;
+        this.animales = animales;
+        this.trabajador = trabajador;
+        this.administrador = administrador;
     }
 
     public int getId_lote() {
@@ -56,13 +84,32 @@ public class Lotes {
         this.Cantidad_animales = Cantidad_animales;
     }
 
-    public List<Animal> getAnimal() {
-        return Animal;
+    public List<Animal> getAnimales() {
+        return animales;
     }
 
-    public void setAnimal(List<Animal> Animal) {
-        this.Animal = Animal;
+    public void setAnimales(List<Animal> animales) {
+        this.animales = animales;
     }
+
+    public Trabajador getTrabajador() {
+        return trabajador;
+    }
+
+    public void setTrabajador(Trabajador trabajador) {
+        this.trabajador = trabajador;
+    }
+
+    public Administrador getAdministrador() {
+        return administrador;
+    }
+
+    public void setAdministrador(Administrador administrador) {
+        this.administrador = administrador;
+    }
+
+    
+
 
     
     

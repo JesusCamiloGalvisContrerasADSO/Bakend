@@ -1,22 +1,36 @@
 package logica;
 
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
+
+@Entity
 public class Peso_animal {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_peso;
     private float peso;
-    private Date fecha_cambio;
+    private Date fechaCambio;
 
+    @ManyToOne
+    @JoinColumn(name = "animal_id")
+    private Animal animal;
     public Peso_animal() {
     }
 
-    public Peso_animal(int id_peso, float peso, Date fecha_cambio) {
+    public Peso_animal(int id_peso, float peso, Date fechaCambio, Animal animal) {
         this.id_peso = id_peso;
         this.peso = peso;
-        this.fecha_cambio = fecha_cambio;
+        this.fechaCambio = fechaCambio;
+        this.animal = animal;
     }
-
+    
     public int getId_peso() {
         return id_peso;
     }
@@ -33,13 +47,23 @@ public class Peso_animal {
         this.peso = peso;
     }
 
-    public Date getFecha_cambio() {
-        return fecha_cambio;
+    public Date getFechaCambio() {
+        return fechaCambio;
     }
 
-    public void setFecha_cambio(Date fecha_cambio) {
-        this.fecha_cambio = fecha_cambio;
+    public void setFechaCambio(Date fechaCambio) {
+        this.fechaCambio = fechaCambio;
     }
+
+    public Animal getAnimal() {
+        return animal;
+    }
+
+    public void setAnimal(Animal animal) {
+        this.animal = animal;
+    }
+
+    
     
      // Método para calcular la ganancia de peso
 //    public float calcularGanancia() {
@@ -50,6 +74,8 @@ public class Peso_animal {
 //        PesoAnimal penultimoPeso = pesos.get(pesos.size() - 2);
 //        return ultimoPeso.getPeso() - penultimoPeso.getPeso();
 //    }
+
+    
 }
 
 
