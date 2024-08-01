@@ -4,6 +4,7 @@
  */
 package logica;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
@@ -22,7 +23,7 @@ import javax.persistence.TemporalType;
  */
 
 @Entity
-public class Compras {
+public class Compras implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
